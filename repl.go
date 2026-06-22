@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+		
 )
 
 
@@ -15,7 +17,7 @@ func cleanInput(text string) []string {
 	return words
 }
 
-func startRepl() {
+func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
@@ -30,7 +32,7 @@ func startRepl() {
 		commandToken := input[0] 
 		command, exist := getCommands()[commandToken]
 		if exist {
-			err := command.callback()
+			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)
 			}

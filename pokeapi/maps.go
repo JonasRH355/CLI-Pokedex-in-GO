@@ -32,6 +32,16 @@ func (c *Client) GetMap(pageURL *string) (mapJson, error) {
 	}
 	
 	var ret mapJson
+
+	// returning if the cache has the value
+	if val, ok := c.cache.Get(url); ok {
+		err := json.Unmarshal(val, &ret)
+		if err != nil {
+			return mapJson{}, err
+		}
+
+		return ret, nil
+	}
 	
 	// Create the request
 	req, err := http.NewRequest("GET",url,nil)
@@ -59,5 +69,6 @@ func (c *Client) GetMap(pageURL *string) (mapJson, error) {
 		return ret, err
 	}
 
+	c.cache.Add(url, dat)
 	return ret, nil
 }

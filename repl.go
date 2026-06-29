@@ -29,7 +29,12 @@ func startRepl(cfg *config) {
 			continue
 		}
 		
-		commandToken := input[0] 
+		commandToken := input[0]
+
+		if len(input) > 1 {
+			cfg.atribute = input[1]
+		}
+		 
 		command, exist := getCommands()[commandToken]
 		if exist {
 			err := command.callback(cfg)

@@ -60,3 +60,16 @@ func commandMapB(cfg *config) error {
 	
 	return nil
 }
+
+func commandExplore(cfg *config) error {
+	val, err := cfg.pokeapiClient.GetExploreRegion(cfg.atribute)
+	if err != nil {
+		return err
+	}
+	
+	for i := 0; i < len(val.Pokemon_encounters); i++ {
+		fmt.Println(val.Pokemon_encounters[i].Pokemon.Name)
+	}
+
+	return nil
+}

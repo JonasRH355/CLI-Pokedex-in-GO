@@ -7,34 +7,30 @@ import (
 	"io"
 )
 
-type Pokemons struct {
+type Pokemon struct {
+	Id int `json:"id"`
 	Name string `json:"name"`
-	Pokemon_encounters []struct{
-		Pokemon pokemon_inf `json:"pokemon"`
-		
-	} `json:"pokemon_encounters"`
-
+	Base_experience int `json:"base_experience"`
 }
 
-type pokemon_inf struct {
-	Name string `json:"name"`
-	Url string `json:"url"`
-}
+// URLs
+// func getUrls() map[string]string {
+// 	return map[string]string {
+// 		"map": "https://pokeapi.co/api/v2/location-area/", 
+// 	}
+// }
 
-// https://pokeapi.co/api/v2/location-area/{id or name}/
-// https://pokeapi.co/api/v2/location-area/canalave-city-area?field=PokemonEncounter
-
-func (c *Client) GetExploreRegion(name string) (Pokemons, error) {
+func (c *Client) GetPokemon(poke string) (Pokemon, error) {
 	// Create the ENDPOINT
-	url := baseURL + "/location-area/" + name
+	url := baseURL + "/pokemon/" + poke 
 	
-	var ret Pokemons
+	var ret Pokemon
 
 	// returning if the cache has the value
 	if val, ok := c.cache.Get(url); ok {
 		err := json.Unmarshal(val, &ret)
 		if err != nil {
-			return Pokemons{}, err
+			return Pokemon{}, err
 		}
 
 		return ret, nil

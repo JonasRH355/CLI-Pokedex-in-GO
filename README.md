@@ -129,22 +129,6 @@ go build
 
 ---
 
-# Future Improvements
-
-Some ideas to continue improving the project:
-
-* Save the Pokédex locally between executions
-* Add Pokémon battles
-* Display Pokémon sprites in the terminal
-* Add search and filtering commands
-* Improve catch mechanics with status effects
-* Add colored terminal output
-* Support command auto-completion
-* Add unit tests
-* Package the application for multiple operating systems
-
----
-
 # Credits
 
 This project was built as part of the **Boot.dev** Go Backend curriculum and uses data provided by the **PokéAPI**.
